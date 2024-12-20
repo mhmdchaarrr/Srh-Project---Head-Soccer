@@ -9,8 +9,14 @@ height = 800
 #uses the width and height variables for the screen size 
 screen = pygame.display.set_mode((width, height))
 
-#loading the images and connecting them to variables
+#adding needed colors for the objects
+white = (255,255,255)
+black = (0,0,0)
+gray = (200,200,200)
+red = (255,0,0)
+green = (0,255,0)
 
+#loading the images and connecting them to variables
 logo = pygame.image.load('logo.png')
 bg = pygame.image.load('background.jpg')
 
