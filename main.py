@@ -20,6 +20,7 @@ menucolor = (9,36,96)
 
 # creating a small and large fonts for the game
 
+info_font = pygame.font.Font(None, 40)
 small_font = pygame.font.Font(None, 50)
 large_font = pygame.font.Font(None, 100)
 
@@ -62,11 +63,15 @@ def main_menu():
         #place the button above the play text and rect but still act the same, if the code is above the player text and rect line, the white text would overlay the image
         screen.blit(playbutton,(590,353))
 
-        screen.blit(infobutton,(590,500))
+        screen.blit(infobutton,(590,480))
 
         # same as the play but for the instructions
-        Instructions_text = small_font.render("Press space to Play", True, white)
+        Instructions_text = info_font.render("Press space to Play", True, white)
         Instructions_rect = Instructions_text.get_rect(center=(700,700))
+        screen.blit(Instructions_text, Instructions_rect)
+
+        Instructions_text = info_font.render("Press Tab for How To Play", True, white)
+        Instructions_rect = Instructions_text.get_rect(center=(700,750))
         screen.blit(Instructions_text, Instructions_rect)
 
         pygame.display.flip() 
