@@ -104,6 +104,12 @@ def options():
         pygame.display.flip()
 
 def main():
+
+
+    player = pygame.Rect(100,700,100,100)
+    opponent = pygame.Rect(1200,700,100,100)
+    ball = pygame.Rect(width // 2,height // 2,50,50)
+    
     mainrunning = True
     game_mode = None
     is_paused = False
@@ -122,7 +128,13 @@ def main():
                     mainrunning = False
 
             screen.blit(bg,(0,0))
+
+            pygame.draw.rect(screen,red,player)
+            pygame.draw.rect(screen,green,opponent)
+            pygame.draw.ellipse(screen,black,ball)
             pygame.display.flip()
+
+    pygame.quit()
 
 if __name__ == "__main__":
     main()
