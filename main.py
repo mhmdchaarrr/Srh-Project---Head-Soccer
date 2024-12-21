@@ -34,40 +34,51 @@ pygame.display.set_caption("Srh Project - Head Soccer")
 pygame.display.set_icon(logo)
 
 def main_menu():
-    
-    while True:
+    menurunning = True
+    while menurunning:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    return True
+
+        #add the fill of the screen to the desired color
         screen.fill(menucolor)
-
+        #adds the logo in the x and y axis
         screen.blit(logo,(425, 50))
-
+        # play text is the text, and rect creates a rectangle is a x and y coordinates, blit combines these two together
         Play_text = large_font.render("Play", True, white)
         Play_rect = Play_text.get_rect(center=(700,400))
-        screen.blit(Play_text,Play_rect)
+        screen.blit(Play_text, Play_rect)
 
-        Instructions_text=small_font.render("Press space to Play", True, white)
-        Instructions_rect=Instructions_text.get_rect(center=(700,700))
-        screen.blit(Instructions_text,Instructions_rect)
+        Instructions_text = small_font.render("Press space to Play", True, white)
+        Instructions_rect = Instructions_text.get_rect(center=(700,700))
+        screen.blit(Instructions_text, Instructions_rect)
 
-        pygame.display.flip()
+        pygame.display.flip() 
 
 
 def main():
-    
+    mainrunning = True
     game_mode = None
     is_paused = False
     
-    #event loop , when variable running is true which tells us the screen will run while it is true 
-    running = True
-    while running:
+    while mainrunning:
         if game_mode is None:
-            main_menu()
+            # true means space is presses, False if screen shuts down
+            if main_menu():
+                game_mode = "game"
+            else:
+                mainrunning = False
+        else:
             for event in pygame.event.get():
                 # if you want to break the loop, we will change the variable of runnning into false 
                 if event.type == pygame.QUIT:
-                    running = False
+                    mainrunning = False
 
-    screen.blit(bg,(0,0))
-    pygame.display.update()
+            screen.blit(bg,(0,0))
+            pygame.display.flip()
 
 if __name__ == "__main__":
     main()
