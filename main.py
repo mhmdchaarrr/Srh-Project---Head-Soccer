@@ -17,6 +17,11 @@ gray = (200,200,200)
 red = (255,0,0)
 green = (0,255,0)
 
+# creating a small and large fonts for the game
+
+small_font = pygame.font.Font(None, 50)
+large_font = pygame.font.Font(None, 100)
+
 #loading the images and connecting them to variables
 logo = pygame.image.load('logo.png')
 bg = pygame.image.load('background.jpg')
