@@ -276,6 +276,11 @@ def main():
             pygame.draw.rect(screen, gray, goal_right)
             pygame.draw.rect(screen, black, bar1)
             pygame.draw.rect(screen, black, bar2)
+            
+
+            score_text = large_font.render(f"{player_score} - {opponent_score}", True, black)
+            score_rect = score_text.get_rect(center=(width//2, 50))
+            screen.blit(score_text, score_rect)
             pygame.display.flip()
 
             clock.tick(60)
