@@ -16,6 +16,7 @@ black = (0,0,0)
 gray = (200,200,200)
 red = (255,0,0)
 green = (0,255,0)
+menucolor = (9,36,96)
 
 # creating a small and large fonts for the game
 
@@ -32,13 +33,41 @@ bg = pygame.transform.scale(bg, (width, height))
 pygame.display.set_caption("Srh Project - Head Soccer")
 pygame.display.set_icon(logo)
 
-#event loop , when variable running is true which tells us the screen will run while it is true 
-running = True
-while running:
-    for event in pygame.event.get():
-        # if you want to break the loop, we will change the variable of runnning into false 
-        if event.type == pygame.QUIT:
-            running = False
+def main_menu():
+    
+    while True:
+        screen.fill(menucolor)
+
+        screen.blit(logo,(425, 50))
+
+        Play_text = large_font.render("Play", True, white)
+        Play_rect = Play_text.get_rect(center=(700,400))
+        screen.blit(Play_text,Play_rect)
+
+        Instructions_text=small_font.render("Press space to Play", True, white)
+        Instructions_rect=Instructions_text.get_rect(center=(700,700))
+        screen.blit(Instructions_text,Instructions_rect)
+
+        pygame.display.flip()
+
+
+def main():
+    
+    game_mode = None
+    is_paused = False
+    
+    #event loop , when variable running is true which tells us the screen will run while it is true 
+    running = True
+    while running:
+        if game_mode is None:
+            main_menu()
+            for event in pygame.event.get():
+                # if you want to break the loop, we will change the variable of runnning into false 
+                if event.type == pygame.QUIT:
+                    running = False
 
     screen.blit(bg,(0,0))
     pygame.display.update()
+
+if __name__ == "__main__":
+    main()
