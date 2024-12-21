@@ -25,6 +25,7 @@ large_font = pygame.font.Font(None, 100)
 
 #loading the images and connecting them to variables
 logo = pygame.image.load('logo.png')
+playbutton = pygame.image.load('play_button-removebg-preview.png')
 bg = pygame.image.load('background.jpg')
 # Scale the background image to match the screen size
 bg = pygame.transform.scale(bg, (width, height))
@@ -47,12 +48,18 @@ def main_menu():
         screen.fill(menucolor)
         #adds the logo in the x and y axis
         screen.blit(logo,(425, 50))
-        # play text is the text, and rect creates a rectangle is a x and y coordinates, blit combines these two together
+        
+        
+        # play text is the text, and rect creates a rectangle is a x and y coordinates, blit combines the two
         Play_text = large_font.render("Play", True, white)
         Play_rect = Play_text.get_rect(center=(700,400))
         screen.blit(Play_text, Play_rect)
 
-        Instructions_text = small_font.render("Press space to Play", True, white)
+        #place the button above the play text and rect but still act the same, if the code is above the player text and rect line, the white text would overlay the image
+        screen.blit(playbutton,(590,353))
+        
+        # same as the play but for the instructions, but false since it gives the pixeled effect
+        Instructions_text = small_font.render("Press space to Play", False, white)
         Instructions_rect = Instructions_text.get_rect(center=(700,700))
         screen.blit(Instructions_text, Instructions_rect)
 
