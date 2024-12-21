@@ -82,7 +82,7 @@ def options():
     while True:
         screen.fill(menucolor)
 
-        # Corrected syntax: Replace ':' with '=' for text and rect
+        #kept the text empty due to the text not showing behind the button
         options_text = small_font.render("", True, white)
         options_rect = options_text.get_rect(center=(700, 400))
         screen.blit(options_text, options_rect)
@@ -110,6 +110,15 @@ def main():
     opponent = pygame.Rect(1200,700,100,100)
     ball = pygame.Rect(width // 2,height // 2,50,50)
     
+    player_velocity_y = 0
+    opponent_velocity_y = 0
+    gravity = 0.4
+    jump_strength=-12
+    move_speed= 5
+    ground_level = 800
+
+    clock = pygame.time.Clock()
+
     mainrunning = True
     game_mode = None
     is_paused = False
@@ -127,12 +136,63 @@ def main():
                 if event.type == pygame.QUIT:
                     mainrunning = False
 
+                #keydown allows the use of the keyboard in oygame
+                if event.type == pygame.KEYDOWN:
+                    # first we check on the event the button w is pressed and the player rect is on the ground
+                    # if both are true, we will see the player jump from 0 to the designed jump strength
+                    # since jump strength is a variable we can control, we can control how high the player jumps
+                    if event.key == pygame.K_w and player.bottom >= ground_level:
+                        player_velocity_y = jump_strength
+                    # same with the player's jump
+                    if event.key == pygame.K_UP and opponent.bottom >= ground_level:
+                        opponent_velocity_y = jump_strength
+
+            # Get the state of all keyboard key
+            keys = pygame.key.get_pressed()
+            
+            # if the player is not at the 0 axis / the far left and the button a is pressed, it moves at the movespeed variable in the negative which glides it to the left 
+            if keys[pygame.K_a] and player.left > 0:
+                player.x -= move_speed
+            # same thing but is not at the width, which is the far right, and button d is pressed, its moves the player in the positive which glides it to the right 
+            if keys[pygame.K_d] and player.right < width:
+                player.x += move_speed
+                
+            # same thing as the player but with different buttons 
+            if keys[pygame.K_LEFT] and opponent.left > 0:
+                opponent.x -= move_speed
+            if keys[pygame.K_RIGHT] and opponent.right < width:
+                opponent.x += move_speed
+
+            # putting it as >0 and <width act as a border for the player and opponent
+            
+
+            # Apply gravity and update positions for player 1
+            player_velocity_y += gravity
+            player.y += player_velocity_y
+            
+            # Apply gravity and update positions for opponent
+            opponent_velocity_y += gravity
+            opponent.y += opponent_velocity_y
+            
+            # Ground collision for player 1
+            if player.bottom > ground_level:
+                player.bottom = ground_level
+                player_velocity_y = 0
+                
+            # Ground collision for opponent
+            if opponent.bottom > ground_level:
+                opponent.bottom = ground_level
+                opponent_velocity_y = 0
+
             screen.blit(bg,(0,0))
 
+            # adding these would allow the objects to show up of the screen
             pygame.draw.rect(screen,red,player)
             pygame.draw.rect(screen,green,opponent)
             pygame.draw.ellipse(screen,black,ball)
             pygame.display.flip()
+
+            clock.tick(60)
 
     pygame.quit()
 
