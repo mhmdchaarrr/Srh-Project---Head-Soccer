@@ -1,6 +1,7 @@
 import pygame  
 
-pygame.init
+#added () to the text
+pygame.init()
 
 #setting up the width and height to set it up for the screen or display size
 width = 1400
@@ -19,8 +20,10 @@ green = (0,255,0)
 #loading the images and connecting them to variables
 logo = pygame.image.load('logo.png')
 bg = pygame.image.load('background.jpg')
+# Scale the background image to match the screen size
+bg = pygame.transform.scale(bg, (width, height))
 
-#nameing the the title of the game and adding the logo of the game
+#nameing the title of the game and adding the logo of the game
 pygame.display.set_caption("Srh Project - Head Soccer")
 pygame.display.set_icon(logo)
 
@@ -31,3 +34,6 @@ while running:
         # if you want to break the loop, we will change the variable of runnning into false 
         if event.type == pygame.QUIT:
             running = False
+
+    screen.blit(bg,(0,0))
+    pygame.display.update()
