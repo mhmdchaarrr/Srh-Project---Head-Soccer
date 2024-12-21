@@ -28,6 +28,8 @@ large_font = pygame.font.Font(None, 100)
 logo = pygame.image.load('logo.png')
 playbutton = pygame.image.load('play_button_updated-removebg-preview.png')
 infobutton = pygame.image.load('options_for_info_-removebg-preview.png')
+htpbutton = pygame.image.load('htpbutton.png')
+htpbuttonsize = pygame.transform.scale(htpbutton,(700,600))
 bg = pygame.image.load('background.jpg')
 # Scale the background image to match the screen size
 bg = pygame.transform.scale(bg, (width, height))
@@ -81,9 +83,11 @@ def options():
         screen.fill(menucolor)
 
         # Corrected syntax: Replace ':' with '=' for text and rect
-        options_text = small_font.render("Use W,A,D to control player one and use UP,LEFT,RIGHT to control player two", True, white)
+        options_text = small_font.render("", True, white)
         options_rect = options_text.get_rect(center=(700, 400))
         screen.blit(options_text, options_rect)
+
+        screen.blit(htpbuttonsize,(345,90))
 
         Instructions_text = small_font.render("Press Backspace to Return", True, white)
         Instructions_rect = Instructions_text.get_rect(center=(700,700))
