@@ -115,7 +115,9 @@ def main():
     bar1 = pygame.Rect(1325,550,300,10)
     bar2 = pygame.Rect(0,550,80,10)
 
-    
+    player_score = 0
+    opponent_score = 0
+
     player_velocity_y = 0
     opponent_velocity_y = 0
     gravity = 0.4
@@ -239,6 +241,27 @@ def main():
                     else:
                         #same as the above but for the y axis
                         ball_velocity[1] *= -1 
+           
+            # Goal detection
+            if ball.colliderect(goal_left):
+                opponent_score += 1
+                player.x, player.y = 100, 700
+                opponent.x, opponent.y = 1200,700
+                # Reset ball position
+                ball.center = (width // 2, height // 2)
+                ball_velocity = [random.choice([-5, 5]), random.choice([-3, 3])]
+
+            if ball.colliderect(goal_right):
+                player_score += 1
+                player.x, player.y = 100, 700
+                opponent.x, opponent.y = 1200,700
+                # Reset ball position
+                ball.center = (width // 2, height // 2)
+                ball_velocity = [random.choice([-5, 5]), random.choice([-3, 3])]
+
+
+
+        
 
 
             screen.blit(bg,(0,0))
