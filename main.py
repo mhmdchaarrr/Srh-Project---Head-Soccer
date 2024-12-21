@@ -1,4 +1,5 @@
-import pygame  
+import pygame
+import random  
 
 #added () to the text
 pygame.init()
@@ -116,6 +117,13 @@ def main():
     jump_strength=-12
     move_speed= 5
     ground_level = 800
+    #this is split into two, one for the x axis and one for the y axis 
+    #the x axis is a random choice between two, -5 or 5, and the y axis is the same for -3 and 3
+    #this uses the random feature which picks randomly
+    ball_velocity = [random.choice([-5, 5]), random.choice([-3, 3])]
+    #this controls how much the ball keeps after it bounces
+    #if this was -1, it would have to difference in the bounce and keep bouncing without loosing energy
+    ball_bounce = -0.8
 
     clock = pygame.time.Clock()
 
@@ -183,6 +191,40 @@ def main():
             if opponent.bottom > ground_level:
                 opponent.bottom = ground_level
                 opponent_velocity_y = 0
+
+            #this increases the vertical velocity by adding gravity
+            ball_velocity[1] += gravity
+            #updates the ball's position
+            ball.x += ball_velocity[0]
+            ball.y += ball_velocity[1]
+            
+            # since in the y axis, 0 is the highest point and height (800) is the lowest
+            #so when ball hits the bottom, at the ground level/ height, it bounces back depending on the bounce
+            if  ball.bottom >= height:
+                ball.bottom = height
+                ball_velocity[1] *= ball_bounce
+            #same but not with bottom, the highest point which is 0
+            if  ball.top <= 0:
+                ball.top = 0
+                ball_velocity[1] *= ball_bounce
+
+            #same with the top and bottom, we do the same with the left and right
+            # in the x axis, 0 is the far left and width (1400) is the far right
+            if ball.left <= 0 or ball.right >= width:
+                ball_velocity[0] = -ball_velocity[0]
+
+            # first, it checks if there is a collision between the ball and the player
+            # lets say the player is cut in half, if the ball hits the right side of the player, it goes to the right and vis versa
+            # the vertical velocity is constant at -8
+            if  ball.colliderect(player):
+                ball_velocity[0] = 5 if ball.centerx > player.centerx else -5
+                ball_velocity[1] = -8
+
+            # same thing but for the opponent
+            if ball.colliderect(opponent):
+               ball_velocity[0] = 5 if ball.centerx > opponent.centerx else -5
+               ball_velocity[1] = -8 
+
 
             screen.blit(bg,(0,0))
 
