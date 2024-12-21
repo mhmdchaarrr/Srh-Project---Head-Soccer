@@ -42,6 +42,9 @@ def main_menu():
             if event.type == pygame.QUIT:
                 return False
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_TAB:
+                    options()
+            if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     return True
 
@@ -61,13 +64,35 @@ def main_menu():
 
         screen.blit(infobutton,(590,500))
 
-        # same as the play but for the instructions, but false since it gives the pixeled effect
-        Instructions_text = small_font.render("Press space to Play", False, white)
+        # same as the play but for the instructions
+        Instructions_text = small_font.render("Press space to Play", True, white)
         Instructions_rect = Instructions_text.get_rect(center=(700,700))
         screen.blit(Instructions_text, Instructions_rect)
 
         pygame.display.flip() 
 
+def options():
+    while True:
+        screen.fill(menucolor)
+
+        # Corrected syntax: Replace ':' with '=' for text and rect
+        options_text = small_font.render("Use W,A,D to control player one and use UP,LEFT,RIGHT to control player two", True, white)
+        options_rect = options_text.get_rect(center=(700, 400))
+        screen.blit(options_text, options_rect)
+
+        Instructions_text = small_font.render("Press Backspace to Return", True, white)
+        Instructions_rect = Instructions_text.get_rect(center=(700,700))
+        screen.blit(Instructions_text, Instructions_rect)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                return
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    return  # Exit options to main menu
+                
+        pygame.display.flip()
 
 def main():
     mainrunning = True
