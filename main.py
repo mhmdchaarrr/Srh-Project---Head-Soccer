@@ -110,6 +110,11 @@ def main():
     player = pygame.Rect(100,700,100,100)
     opponent = pygame.Rect(1200,700,100,100)
     ball = pygame.Rect(width // 2,height // 2,50,50)
+    goal_left = pygame.Rect(70, 550, 10,900)
+    goal_right = pygame.Rect(1330, 550, 10, 900)
+    bar1 = pygame.Rect(1325,550,300,10)
+    bar2 = pygame.Rect(0,550,80,10)
+
     
     player_velocity_y = 0
     opponent_velocity_y = 0
@@ -225,6 +230,16 @@ def main():
                ball_velocity[0] = 5 if ball.centerx > opponent.centerx else -5
                ball_velocity[1] = -8 
 
+            #if the ball collides with either crossbar 1 or 2, if the the velocity[0] or the x axis is greater than velocity[1] the y axis, the ball moves more with the x axis rather than the y axis
+            if ball.colliderect(bar1) or ball.colliderect(bar2):
+                    # Determine bounce direction
+                    if abs(ball_velocity[1]) < abs(ball_velocity[0]):
+                        #horizantal movement, reversing the x axis direction
+                        ball_velocity[0] *= -1
+                    else:
+                        #same as the above but for the y axis
+                        ball_velocity[1] *= -1 
+
 
             screen.blit(bg,(0,0))
 
@@ -232,6 +247,10 @@ def main():
             pygame.draw.rect(screen,red,player)
             pygame.draw.rect(screen,green,opponent)
             pygame.draw.ellipse(screen,black,ball)
+            pygame.draw.rect(screen, gray, goal_left)
+            pygame.draw.rect(screen, gray, goal_right)
+            pygame.draw.rect(screen, black, bar1)
+            pygame.draw.rect(screen, black, bar2)
             pygame.display.flip()
 
             clock.tick(60)
