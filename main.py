@@ -245,6 +245,7 @@ def main():
             # Goal detection
             if ball.colliderect(goal_left):
                 opponent_score += 1
+                #resets player position
                 player.x, player.y = 100, 700
                 opponent.x, opponent.y = 1200,700
                 # Reset ball position
@@ -253,6 +254,7 @@ def main():
 
             if ball.colliderect(goal_right):
                 player_score += 1
+                #resets the players position
                 player.x, player.y = 100, 700
                 opponent.x, opponent.y = 1200,700
                 # Reset ball position
