@@ -34,6 +34,10 @@ htpbuttonsize = pygame.transform.scale(htpbutton,(700,600))
 bg = pygame.image.load('background.jpg')
 # Scale the background image to match the screen size
 bg = pygame.transform.scale(bg, (width, height))
+mhmdleft = pygame.image.load('mhmdleft.png').convert_alpha()
+mhmdsize = pygame.transform.scale(mhmdleft, (100,100))
+youssefright = pygame.image.load('youssefright.png').convert_alpha()
+youssefsize = pygame.transform.scale(youssefright, (100,100))
 
 #nameing the title of the game and adding the logo of the game
 pygame.display.set_caption("Srh Project - Head Soccer")
@@ -126,8 +130,6 @@ def main():
     ground_level = 800
     #this is split into two, one for the x axis and one for the y axis 
     #the x axis is a random choice between two, -5 or 5, and the y axis is the same for -3 and 3
-    #this uses the random feature which picks randomly
-    ball_velocity = [random.choice([-5, 5]), random.choice([-3, 3])]
     #this controls how much the ball keeps after it bounces
     #if this was -1, it would have to difference in the bounce and keep bouncing without loosing energy
     ball_bounce = -0.8
@@ -280,8 +282,8 @@ def main():
             screen.blit(bg,(0,0))
 
             # adding these would allow the objects to show up of the screen
-            pygame.draw.rect(screen,red,player)
-            pygame.draw.rect(screen,green,opponent)
+            screen.blit(youssefsize,player)
+            screen.blit(mhmdsize,opponent)
             pygame.draw.ellipse(screen,black,ball)
             pygame.draw.rect(screen, gray, goal_left)
             pygame.draw.rect(screen, gray, goal_right)
