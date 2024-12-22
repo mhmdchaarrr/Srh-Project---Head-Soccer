@@ -116,8 +116,8 @@ def main():
     ball = pygame.Rect(width // 2,height // 2,50,50)
     goal_left = pygame.Rect(70, 550, 10,900)
     goal_right = pygame.Rect(1330, 550, 10, 900)
-    bar1 = pygame.Rect(1325,550,300,10)
-    bar2 = pygame.Rect(0,550,80,10)
+    bar1 = pygame.Rect(1325,540,300,10)
+    bar2 = pygame.Rect(0,540,85,10)
 
     player_score = 0
     opponent_score = 0
@@ -130,6 +130,8 @@ def main():
     ground_level = 800
     #this is split into two, one for the x axis and one for the y axis 
     #the x axis is a random choice between two, -5 or 5, and the y axis is the same for -3 and 3
+    #this uses the random feature which picks randomly
+    ball_velocity = [random.choice([-5, 5]), random.choice([-3, 3])]
     #this controls how much the ball keeps after it bounces
     #if this was -1, it would have to difference in the bounce and keep bouncing without loosing energy
     ball_bounce = -0.8
