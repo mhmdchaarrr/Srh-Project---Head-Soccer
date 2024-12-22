@@ -35,9 +35,9 @@ bg = pygame.image.load('background.jpg')
 # Scale the background image to match the screen size
 bg = pygame.transform.scale(bg, (width, height))
 mhmdleft = pygame.image.load('mhmdleft.png').convert_alpha()
-mhmdsize = pygame.transform.scale(mhmdleft, (100,100))
+mhmdsize = pygame.transform.scale(mhmdleft, (125,125))
 youssefright = pygame.image.load('youssefright.png').convert_alpha()
-youssefsize = pygame.transform.scale(youssefright, (100,100))
+youssefsize = pygame.transform.scale(youssefright, (125,125))
 
 #nameing the title of the game and adding the logo of the game
 pygame.display.set_caption("Srh Project - Head Soccer")
@@ -77,7 +77,7 @@ def main_menu():
         Instructions_rect = Instructions_text.get_rect(center=(700,700))
         screen.blit(Instructions_text, Instructions_rect)
 
-        Instructions_text = info_font.render("Press Tab for How To Play", True, white)
+        Instructions_text = info_font.render("Press Tab for Help", True, white)
         Instructions_rect = Instructions_text.get_rect(center=(700,750))
         screen.blit(Instructions_text, Instructions_rect)
 
@@ -111,8 +111,8 @@ def options():
 def main():
 
 
-    player = pygame.Rect(100,700,100,100)
-    opponent = pygame.Rect(1200,700,100,100)
+    player = pygame.Rect(100,700,125,125)
+    opponent = pygame.Rect(1200,700,125,125)
     ball = pygame.Rect(width // 2,height // 2,50,50)
     goal_left = pygame.Rect(70, 550, 10,900)
     goal_right = pygame.Rect(1330, 550, 10, 900)
