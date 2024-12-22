@@ -161,24 +161,35 @@ def main():
                     # same with the player's jump
                     if event.key == pygame.K_UP and opponent.bottom >= ground_level:
                         opponent_velocity_y = jump_strength
+                    # this allows us to go back to the main menu without closing the game and opening it again       
+                    if event.key == pygame.K_ESCAPE:
+                    #if esc is pressed, the screen will go back tp the main menu and reset the scoreboard and players position
+                        # reseting the scoreboard
+                        player_score = 0
+                        opponent_score = 0
+                        # reseting the players position
+                        player.x, player.y = 100, 700
+                        opponent.x, opponent.y = 1200, 700
+                        # reseting the ball's position
+                        ball.center = (width // 2, height // 2)
+                        ball_velocity = [random.choice([-5, 5]), random.choice([-3, 3])]
+                        # Go back to menu
+                        game_mode = None
 
             # Get the state of all keyboard key
             keys = pygame.key.get_pressed()
-            
             # if the player is not at the 0 axis / the far left and the button a is pressed, it moves at the movespeed variable in the negative which glides it to the left 
             if keys[pygame.K_a] and player.left > 0:
                 player.x -= move_speed
             # same thing but is not at the width, which is the far right, and button d is pressed, its moves the player in the positive which glides it to the right 
             if keys[pygame.K_d] and player.right < width:
                 player.x += move_speed
-                
             # same thing as the player but with different buttons 
+            # putting it as >0 and <width act as a border for the player and opponent
             if keys[pygame.K_LEFT] and opponent.left > 0:
                 opponent.x -= move_speed
             if keys[pygame.K_RIGHT] and opponent.right < width:
                 opponent.x += move_speed
-
-            # putting it as >0 and <width act as a border for the player and opponent
             
 
             # Apply gravity and update positions for player 1
