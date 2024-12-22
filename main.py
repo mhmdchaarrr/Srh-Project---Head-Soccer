@@ -39,6 +39,11 @@ mhmdsize = pygame.transform.scale(mhmdleft, (125,125))
 youssefright = pygame.image.load('youssefright.png').convert_alpha()
 youssefsize = pygame.transform.scale(youssefright, (125,125))
 
+#adding sound for the goals
+goal_sound = pygame.mixer.Sound('goal.mp3')
+
+bg_sound = pygame.mixer.Sound('bg_sound.mp3')
+
 #nameing the title of the game and adding the logo of the game
 pygame.display.set_caption("Srh Project - Head Soccer")
 pygame.display.set_icon(logo)
@@ -266,6 +271,7 @@ def main():
                 # Reset ball position
                 ball.center = (width // 2, height // 2)
                 ball_velocity = [random.choice([-5, 5]), random.choice([-3, 3])]
+                goal_sound.play()
 
             if ball.colliderect(goal_right):
                 player_score += 1
@@ -275,6 +281,7 @@ def main():
                 # Reset ball position
                 ball.center = (width // 2, height // 2)
                 ball_velocity = [random.choice([-5, 5]), random.choice([-3, 3])]
+                goal_sound.play()
 
 
 
@@ -282,6 +289,8 @@ def main():
 
 
             screen.blit(bg,(0,0))
+
+            bg_sound.play()
 
             # adding these would allow the objects to show up of the screen
             screen.blit(youssefsize,player)
