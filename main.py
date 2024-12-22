@@ -90,7 +90,7 @@ def options():
 
         screen.blit(htpbuttonsize,(345,90))
 
-        Instructions_text = small_font.render("Press Backspace to Return", True, white)
+        Instructions_text = small_font.render("Press Esc to Return", True, white)
         Instructions_rect = Instructions_text.get_rect(center=(700,700))
         screen.blit(Instructions_text, Instructions_rect)
 
@@ -99,7 +99,7 @@ def options():
                 pygame.quit()
                 return
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_BACKSPACE:
+                if event.key == pygame.K_ESCAPE:
                     return  # Exit options to main menu
                 
         pygame.display.flip()
