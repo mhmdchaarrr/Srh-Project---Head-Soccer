@@ -42,8 +42,6 @@ youssefsize = pygame.transform.scale(youssefright, (125,125))
 #adding sound for the goals
 goal_sound = pygame.mixer.Sound('goal.mp3')
 
-bg_sound = pygame.mixer.Sound('bg_sound.mp3')
-
 #nameing the title of the game and adding the logo of the game
 pygame.display.set_caption("Srh Project - Head Soccer")
 pygame.display.set_icon(logo)
@@ -290,7 +288,7 @@ def main():
 
             screen.blit(bg,(0,0))
 
-            bg_sound.play()
+            
 
             # adding these would allow the objects to show up of the screen
             screen.blit(youssefsize,player)
